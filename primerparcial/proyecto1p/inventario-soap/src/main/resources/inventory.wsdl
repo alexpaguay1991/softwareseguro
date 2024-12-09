@@ -1,0 +1,70 @@
+<definitions xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:tns="http://www.ecovida.com/inventory"
+             name="InventoryService"
+             targetNamespace="http://www.ecovida.com/inventory">
+
+    <!-- Tipo de dato para Category -->
+    <types>
+        <xsd:schema targetNamespace="http://www.ecovida.com/inventory">
+            <xsd:complexType name="Category">
+                <xsd:sequence>
+                    <xsd:element name="id" type="xsd:long"/>
+                    <xsd:element name="name" type="xsd:string"/>
+                    <xsd:element name="description" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+
+            <!-- Tipo de dato para Product -->
+            <xsd:complexType name="Product">
+                <xsd:sequence>
+                    <xsd:element name="id" type="xsd:long"/>
+                    <xsd:element name="name" type="xsd:string"/>
+                    <xsd:element name="description" type="xsd:string"/>
+                    <xsd:element name="price" type="xsd:decimal"/>
+                    <xsd:element name="imageUrl" type="xsd:string"/>
+                    <xsd:element name="stockQuantity" type="xsd:int"/>
+                    <xsd:element name="createdAt" type="xsd:dateTime"/>
+                    <xsd:element name="updatedAt" type="xsd:dateTime"/>
+                    <xsd:element name="category" type="tns:Category"/>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:schema>
+    </types>
+
+    <!-- Definición del servicio y sus operaciones -->
+    <message name="GetInventoryRequest">
+        <part name="categoryId" type="xsd:long"/>
+    </message>
+
+    <message name="GetInventoryResponse">
+        <part name="products" type="tns:Product"/>
+    </message>
+
+    <portType name="InventoryPortType">
+        <operation name="getInventory">
+            <input message="tns:GetInventoryRequest"/>
+            <output message="tns:GetInventoryResponse"/>
+        </operation>
+    </portType>
+
+    <binding name="InventoryBinding" type="tns:InventoryPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="getInventory">
+            <soap:operation soapAction="http://www.ecovida.com/inventory/getInventory"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name="InventoryService">
+        <port name="InventoryPort" binding="tns:InventoryBinding">
+            <soap:address location="http://localhost:8080/ws/inventory"/>
+        </port>
+    </service>
+</definitions>

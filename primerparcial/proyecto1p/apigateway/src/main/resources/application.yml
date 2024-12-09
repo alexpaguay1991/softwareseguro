@@ -1,0 +1,41 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: product-service
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/categorias/**
+        - id: carrito-service
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/cart/**
+        - id: authentication-service
+          uri: http://localhost:8087
+          predicates:
+            - Path=/api/auth/**
+        - id: pedido-service
+          uri: http://localhost:8083
+          predicates:
+            - Path=/api/orders/**
+        - id: pedido-service
+          uri: http://localhost:8084
+          predicates:
+            - Path=/api/users/**
+        - id: envios-service
+          uri: http://localhost:8085
+          predicates:
+            - Path=/api/shipments/**
+
+  application:
+    name: api-gateway
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true

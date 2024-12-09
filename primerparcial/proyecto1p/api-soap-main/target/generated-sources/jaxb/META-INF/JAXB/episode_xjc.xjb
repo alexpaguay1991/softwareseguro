@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<bindings version="3.0" xmlns="https://jakarta.ee/xml/ns/jaxb">
+  <!--
+
+Este archivo ha sido generado por Eclipse Implementation of JAXB v4.0.2 
+Visite https://eclipse-ee4j.github.io/jaxb-ri 
+Todas las modificaciones realizadas en este archivo se perderán si se vuelve a compilar el esquema de origen. 
+Generado el: 2024.12.07 a las 01:54:04 AM ECT
+  -->
+  <bindings scd="x-schema::tns" xmlns:tns="http://www.example.com/demosoap/gen">
+    <schemaBindings map="false">
+      <package name="ec.edu.espe.gen"/>
+    </schemaBindings>
+    <bindings scd="tns:getCategoriesRequest">
+      <class ref="ec.edu.espe.gen.GetCategoriesRequest"/>
+    </bindings>
+    <bindings scd="tns:getCategoriesResponse">
+      <class ref="ec.edu.espe.gen.GetCategoriesResponse"/>
+    </bindings>
+    <bindings scd="~tns:category">
+      <class ref="ec.edu.espe.gen.Category"/>
+    </bindings>
+    <bindings scd="tns:getProductsRequest">
+      <class ref="ec.edu.espe.gen.GetProductsRequest"/>
+    </bindings>
+    <bindings scd="tns:getProductsResponse">
+      <class ref="ec.edu.espe.gen.GetProductsResponse"/>
+    </bindings>
+    <bindings scd="~tns:product">
+      <class ref="ec.edu.espe.gen.Product"/>
+    </bindings>
+    <bindings scd="tns:getProductRequest">
+      <class ref="ec.edu.espe.gen.GetProductRequest"/>
+    </bindings>
+    <bindings scd="tns:getProductResponse">
+      <class ref="ec.edu.espe.gen.GetProductResponse"/>
+    </bindings>
+    <bindings scd="tns:postProductRequest">
+      <class ref="ec.edu.espe.gen.PostProductRequest"/>
+    </bindings>
+    <bindings scd="tns:postProductResponse">
+      <class ref="ec.edu.espe.gen.PostProductResponse"/>
+    </bindings>
+    <bindings scd="tns:putProductRequest">
+      <class ref="ec.edu.espe.gen.PutProductRequest"/>
+    </bindings>
+    <bindings scd="tns:putProductResponse">
+      <class ref="ec.edu.espe.gen.PutProductResponse"/>
+    </bindings>
+    <bindings scd="tns:deleteProductRequest">
+      <class ref="ec.edu.espe.gen.DeleteProductRequest"/>
+    </bindings>
+    <bindings scd="tns:deleteProductResponse">
+      <class ref="ec.edu.espe.gen.DeleteProductResponse"/>
+    </bindings>
+  </bindings>
+</bindings>
+

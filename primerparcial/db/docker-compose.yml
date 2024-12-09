@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+  mysql-master:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: ecovida_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: userpassword
+      MYSQL_ROOT_HOST: '%'
+    ports:
+      - "3305:3306"
+    volumes:
+      - master-data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql  # Cargar el archivo SQL para inicialización
+    command: --server-id=1 --log-bin=mysql-bin --binlog-do-db=ecovida_db
+    networks:
+      - mysql-network
+
+  mysql-replica:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: ecovida_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: userpassword
+      MYSQL_REPLICATION_USER: replication_user
+      MYSQL_REPLICATION_PASSWORD: replication_password
+      MYSQL_MASTER_HOST: mysql-master
+    depends_on:
+      - mysql-master
+    ports:
+      - "3308:3306"
+    command: --server-id=2 --replicate-do-db=ecovida_db
+    networks:
+      - mysql-network
+
+volumes:
+  master-data:
+    driver: local
+
+networks:
+  mysql-network:
+    driver: bridge
