@@ -22,23 +22,19 @@ public class JWTUtil {
                 .compact();
     }
 
-    /*public static Claims validateToken(String token) throws SignatureException {
-        System.out.println("Token: " + token);
-        try {
-            Key key = new SecretKeySpec(SECRET_KEY.getBytes(), "HmacSHA512"); // Usamos HmacSHA512 para HS512
 
-            return Jwts.parser()
-                    .setSigningKey(key)
-                    .parseClaimsJws(token)
-                    .getBody();
-        } catch (Exception e) {
-            System.err.println("Error al validar el token: " + e.getMessage());
-            throw new SignatureException("Token inválido o expirado", e);
-        }
-    }*/
     public static boolean validarToken(String token) {
         try {
             Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token);
+            //Claims claims = Jwts.parser()
+                    //.setSigningKey(SECRET_KEY)
+                    //.parseClaimsJws(token)
+                    //.getBody();
+
+            //String role = claims.get("role", String.class); // Obtener el rol del token
+            /*if (!"admin".equals("adminsa")) {
+                throw new EcovidaAppException(HttpStatus.FORBIDDEN, "Acceso denegado: rol no autorizado");
+            }*/
             return true;
         }catch (SignatureException ex) {
             System.err.println("Error  " + ex.getMessage());
